@@ -25,27 +25,19 @@ import routerBindings, {
   UnsavedChangesNotifier,
   DocumentTitleHandler,
 } from "@refinedev/react-router-v6";
-import {
-  BlogPostList,
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryList,
-  CategoryCreate,
-  CategoryEdit,
-  CategoryShow,
-} from "./pages/categories";
 import { supabaseClient } from "./utility";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header } from "./components/header";
 import authProvider from "./authProvider";
+import { CollectionsList, CollectionsCreate, CollectionsEdit, CollectionsShow } from "./pages/collections";
+import { ComakersList, ComakersCreate, ComakersEdit, ComakersShow } from "./pages/comakers";
+import { CustomersList, CustomersCreate, CustomersEdit, CustomersShow } from "./pages/customers";
+import { LoansList, LoansCreate, LoansEdit, LoansShow } from "./pages/loans";
+import { RoutesList, RoutesCreate, RoutesEdit, RoutesShow } from "./pages/routes";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <AntdApp>
@@ -56,28 +48,37 @@ function App() {
                 authProvider={authProvider}
                 routerProvider={routerBindings}
                 notificationProvider={useNotificationProvider}
-                resources={[
-                  {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                ]}
+                resources={[{
+                  name: "customers",
+                  list: "/customers",
+                  create: "/customers/create",
+                  edit: "/customers/edit/:id",
+                  show: "/customers/show/:id"
+                }, {
+                  name: "comakers",
+                  list: "/comakers",
+                  create: "/comakers/create",
+                  edit: "/comakers/edit/:id",
+                  show: "/comakers/show/:id"
+                }, {
+                  name: "collections",
+                  list: "/collections",
+                  create: "/collections/create",
+                  edit: "/collections/edit/:id",
+                  show: "/collections/show/:id"
+                }, {
+                  name: "loans",
+                  list: "/loans",
+                  create: "/loans/create",
+                  edit: "/loans/edit/:id",
+                  show: "/loans/show/:id"
+                }, {
+                  name: "routes",
+                  list: "/routes",
+                  create: "/routes/create",
+                  edit: "/routes/edit/:id",
+                  show: "/routes/show/:id"
+                }]}
                 options={{
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
@@ -105,17 +106,35 @@ function App() {
                       index
                       element={<NavigateToResource resource="blog_posts" />}
                     />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+                    <Route path="/customers">
+                      <Route index element={<CustomersList />} />
+                      <Route path="create" element={<CustomersCreate />} />
+                      <Route path="edit/:id" element={<CustomersEdit />} />
+                      <Route path="show/:id" element={<CustomersShow />} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+                    <Route path="/comakers">
+                      <Route index element={<ComakersList />} />
+                      <Route path="create" element={<ComakersCreate />} />
+                      <Route path="edit/:id" element={<ComakersEdit />} />
+                      <Route path="show/:id" element={<ComakersShow />} />
+                    </Route>
+                    <Route path="/collections">
+                      <Route index element={<CollectionsList />} />
+                      <Route path="create" element={<CollectionsCreate />} />
+                      <Route path="edit/:id" element={<CollectionsEdit />} />
+                      <Route path="show/:id" element={<CollectionsShow />} />
+                    </Route>
+                    <Route path="/loans">
+                      <Route index element={<LoansList />} />
+                      <Route path="create" element={<LoansCreate />} />
+                      <Route path="edit/:id" element={<LoansEdit />} />
+                      <Route path="show/:id" element={<LoansShow />} />
+                    </Route>
+                    <Route path="/routes">
+                      <Route index element={<RoutesList />} />
+                      <Route path="create" element={<RoutesCreate />} />
+                      <Route path="edit/:id" element={<RoutesEdit />} />
+                      <Route path="show/:id" element={<RoutesShow />} />
                     </Route>
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
