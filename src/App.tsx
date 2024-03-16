@@ -17,7 +17,7 @@ import {
 import "@refinedev/antd/dist/reset.css";
 
 import { dataProvider, liveProvider } from "@refinedev/supabase";
-import { App as AntdApp } from "antd";
+import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import routerBindings, {
   NavigateToResource,
@@ -29,11 +29,32 @@ import { supabaseClient } from "./utility";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header } from "./components/header";
 import authProvider from "./authProvider";
-import { CollectionsList, CollectionsCreate, CollectionsEdit, CollectionsShow } from "./pages/collections";
-import { ComakersList, ComakersCreate, ComakersEdit, ComakersShow } from "./pages/comakers";
-import { CustomersList, CustomersCreate, CustomersEdit, CustomersShow } from "./pages/customers";
+import {
+  CollectionsList,
+  CollectionsCreate,
+  CollectionsEdit,
+  CollectionsShow,
+} from "./pages/collections";
+import {
+  ComakersList,
+  ComakersCreate,
+  ComakersEdit,
+  ComakersShow,
+} from "./pages/comakers";
+import {
+  CustomersList,
+  CustomersCreate,
+  CustomersEdit,
+  CustomersShow,
+} from "./pages/customers";
 import { LoansList, LoansCreate, LoansEdit, LoansShow } from "./pages/loans";
-import { RoutesList, RoutesCreate, RoutesEdit, RoutesShow } from "./pages/routes";
+import {
+  RoutesList,
+  RoutesCreate,
+  RoutesEdit,
+  RoutesShow,
+} from "./pages/routes";
+import Title from "./components/title";
 
 function App() {
   return (
@@ -48,37 +69,43 @@ function App() {
                 authProvider={authProvider}
                 routerProvider={routerBindings}
                 notificationProvider={useNotificationProvider}
-                resources={[{
-                  name: "customers",
-                  list: "/customers",
-                  create: "/customers/create",
-                  edit: "/customers/edit/:id",
-                  show: "/customers/show/:id"
-                }, {
-                  name: "comakers",
-                  list: "/comakers",
-                  create: "/comakers/create",
-                  edit: "/comakers/edit/:id",
-                  show: "/comakers/show/:id"
-                }, {
-                  name: "collections",
-                  list: "/collections",
-                  create: "/collections/create",
-                  edit: "/collections/edit/:id",
-                  show: "/collections/show/:id"
-                }, {
-                  name: "loans",
-                  list: "/loans",
-                  create: "/loans/create",
-                  edit: "/loans/edit/:id",
-                  show: "/loans/show/:id"
-                }, {
-                  name: "routes",
-                  list: "/routes",
-                  create: "/routes/create",
-                  edit: "/routes/edit/:id",
-                  show: "/routes/show/:id"
-                }]}
+                resources={[
+                  {
+                    name: "customers",
+                    list: "/customers",
+                    create: "/customers/create",
+                    edit: "/customers/edit/:id",
+                    show: "/customers/show/:id",
+                  },
+                  {
+                    name: "comakers",
+                    list: "/comakers",
+                    create: "/comakers/create",
+                    edit: "/comakers/edit/:id",
+                    show: "/comakers/show/:id",
+                  },
+                  {
+                    name: "collections",
+                    list: "/collections",
+                    create: "/collections/create",
+                    edit: "/collections/edit/:id",
+                    show: "/collections/show/:id",
+                  },
+                  {
+                    name: "loans",
+                    list: "/loans",
+                    create: "/loans/create",
+                    edit: "/loans/edit/:id",
+                    show: "/loans/show/:id",
+                  },
+                  {
+                    name: "routes",
+                    list: "/routes",
+                    create: "/routes/create",
+                    edit: "/routes/edit/:id",
+                    show: "/routes/show/:id",
+                  },
+                ]}
                 options={{
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
@@ -95,6 +122,7 @@ function App() {
                       >
                         <ThemedLayoutV2
                           Header={() => <Header sticky />}
+                          Title={() => <Title />}
                           Sider={(props) => <ThemedSiderV2 {...props} fixed />}
                         >
                           <Outlet />
